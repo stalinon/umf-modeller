@@ -1,0 +1,119 @@
+﻿<Window x:Class="umf2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:umf2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <TabControl>
+        <TabItem Header="Modeling">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <WpfPlot Name="Chart" Grid.Column="1"/>
+
+
+                <Grid Grid.Column ="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="Model" Grid.Row="0" Width="100" Height="30" Content="Model" Click="Model_Click"/>
+                    <Button x:Name="GifMaker" Grid.Row="1" Width="100" Height="30" Content="Save GIF" Click="GifMaker_Click"/>
+                    <ProgressBar x:Name="Progress"  Grid.Row="2"  Width="200" Height="20"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Properties">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="10,10">
+                    
+                    <Label Content="Тип уравнения, разностная схема" 
+                           HorizontalAlignment="Center"
+                           />
+                    <ComboBox x:Name = "EquationType" Margin="10" SelectionChanged="EquationType_SelectionChanged" />
+                    <ComboBox x:Name = "SchemeType"  Margin="10"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Grid.Row= "1"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Margin="10,10">
+                    
+                    <Button Margin="10,10,10,10" 
+                            Height ="50"
+                            Width ="200"
+                            HorizontalAlignment="Center" 
+                            Content="Save" Click="SaveParameters_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Grid.Row= "0"
+                            Margin="10,10">
+
+                    <Label Content="Начальные условия"
+                           HorizontalAlignment="Center"/>
+                    <TextBox x:Name ="InitialConditions"/>
+                    <Label Content="Граничные условия"
+                           HorizontalAlignment="Center"/>
+                    <StackPanel x:Name="stackPanel" Orientation="Horizontal" >
+                        <TextBox x:Name ="BorderConditions1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,10,0"/>
+                        <TextBox x:Name ="BorderConditions2" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,0"/>
+                    </StackPanel>
+                    <Label Content="Функция в правой части"
+                           HorizontalAlignment="Center"/>
+                    <TextBox x:Name ="RightSideFunction"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2"
+                            Grid.Row= "0"
+                            Margin="10,10">
+                    <Label Content="Параметр А"
+                           HorizontalAlignment="Center"/>
+                    <TextBox x:Name ="ParameterA"/>
+                    <Label Content="Шаг по времени"
+                           HorizontalAlignment="Center"/>
+                    <TextBox x:Name ="TimeStep"/>
+                    <Label Content="Шаг по координате"
+                           HorizontalAlignment="Center"/>
+                    <TextBox x:Name ="CoordinateStep"/>
+                    
+                </StackPanel>
+
+                <StackPanel Grid.Column="0"
+                            Grid.Row= "1"
+                            Margin="10,10">
+                    <Label Content="Масштаб по Х"
+                           HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBox x:Name ="IntegrationLimits1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,10,0"/>
+                        <TextBox x:Name ="IntegrationLimits2" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,0"/>
+                    </StackPanel>
+                    <Label Content="Масштаб по У"
+                           HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBox x:Name ="MeasurementLimits1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,10,0"/>
+                        <TextBox x:Name ="MeasurementLimits2" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,20,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
