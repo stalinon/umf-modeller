@@ -52,7 +52,7 @@ namespace umf2.Model.Equation
         /// <summary>
         ///     Список доступных схем
         /// </summary>
-        public List<IScheme> AvailableSchemes { get => new List<IScheme> { new ExplicitFourPoint() }; }
+        public List<IScheme> AvailableSchemes { get => new List<IScheme> { new ExplicitFourPoint(), new Implicit() }; }
 
         public double[,] Model(string schemeName)
         {

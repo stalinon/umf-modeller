@@ -68,6 +68,12 @@ namespace umf2
                 return;
             }
 
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Progress.Value += Progress.Maximum / 100;
+                Thread.Sleep(100);
+            });
+
             var scheme = new ExplicitFourPoint();
             double[,] array;
 
@@ -81,8 +87,10 @@ namespace umf2
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            Progress.Value += Progress.Maximum / 100;
-                            Thread.Sleep(100);
+                            Chart.Reset();
+                            Chart.Plot.SetAxisLimitsX(equation.IntegrationLimits.Min, equation.IntegrationLimits.Max);
+                            Chart.Plot.SetAxisLimitsY(equation.MeasurementLimits.Min, equation.MeasurementLimits.Max);
+                            Chart.Refresh();
                         });
                     }
                 }
@@ -142,13 +150,13 @@ namespace umf2
             try
             {
                 equation.BorderConditions = (BorderConditions1.Text, BorderConditions2.Text);
-                equation.CoordinateStep = double.Parse(CoordinateStep.Text);
+                equation.CoordinateStep = double.Parse(CoordinateStep.Text.Replace('.',','));
                 equation.InitialConditions = InitialConditions.Text;
-                equation.IntegrationLimits = (double.Parse(IntegrationLimits1.Text), double.Parse(IntegrationLimits2.Text));
-                equation.MeasurementLimits = (double.Parse(MeasurementLimits1.Text), double.Parse(MeasurementLimits2.Text));
-                equation.ParameterA = double.Parse(ParameterA.Text);
-                equation.RightSideFunction = RightSideFunction.Text;
-                equation.TimeStep = double.Parse(TimeStep.Text);
+                equation.IntegrationLimits = (double.Parse(IntegrationLimits1.Text.Replace('.',',')), double.Parse(IntegrationLimits2.Text.Replace('.',',')));
+                equation.MeasurementLimits = (double.Parse(MeasurementLimits1.Text.Replace('.',',')), double.Parse(MeasurementLimits2.Text.Replace('.',',')));
+                equation.ParameterA = double.Parse(ParameterA.Text.Replace('.',','));
+                equation.RightSideFunction = RightSideFunction.Text.Replace(',','.');
+                equation.TimeStep = double.Parse(TimeStep.Text.Replace('.',','));
             }
             catch (Exception ex)
             {

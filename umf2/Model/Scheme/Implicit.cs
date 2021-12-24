@@ -3,9 +3,9 @@ using umf2.Model.Equation;
 
 namespace Model.Scheme
 {
-    public class ExplicitFourPoint : IScheme
+    public class Implicit : IScheme
     {
-        public string Name { get => "Яная четырехточечная схема"; set { Name = value; } }
+        public string Name { get => "Неяная схема"; set { Name = value; } }
 
         /// <summary>
         ///     Моделирование схемы по параметрам уравнения
@@ -52,7 +52,7 @@ namespace Model.Scheme
                     if (j == 0) V[i, j] = u_0_t.Substitute(i).Real;
                     if (j == r - 1) V[i, j] = u_L_t.Substitute(i).Real;
 
-                    V[i + 1, j] = V[i, j] + s * (V[i, j - 1] - 2 * V[i, j] + V[i, j + 1]) + tau * f.Substitute(h * (j - 1), tau * (i - 1)).Real;
+                    V[i + 1, j] = V[i, j] + s * (V[i+1, j+1] - 2 * V[i+1, j] + V[i+1, j-1]) + tau * f.Substitute(h * (j), tau * (i - 1)).Real;
                 }
             }
             return V;
